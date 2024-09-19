@@ -33,8 +33,8 @@
                             <a href="{{route('comments.edit', $comment->id)}}" class="btn btn-sm btn-primary mt-3">Edit</a>
                             <a href="{{ route('comments.destroy', $comment->id) }}" class="btn btn-danger btn-sm mt-3" data-confirm-delete="true">Delete</a>
                             @endif
-                            @endforeach
                             <hr>
+                            @endforeach
 
                         </div>
                     </div>

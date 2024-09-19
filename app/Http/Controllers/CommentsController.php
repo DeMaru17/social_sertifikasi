@@ -64,7 +64,9 @@ class CommentsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $comment = Comments::findOrFail($id);
+
+        return view('edit_comments',compact('comment'));
     }
 
     /**
@@ -72,7 +74,19 @@ class CommentsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $comment = Comments::find($id);
+        $comment->content = $request->input('content');
+        $comment->hashtag = $request->input('hashtag');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $path = $image->store('image', 'public');
+            $name = basename($path);
+            $comment->image = $name;
+        }
+        $comment->save();
+        Alert::success('Success', 'Berhasil edit komen postingan');
+        return redirect()->route('posts.index')->with('success', 'Comment updated successfully');
     }
 
     /**
