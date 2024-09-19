@@ -12,7 +12,32 @@
           <li class="nav-item">
             <a class="nav-link" href="{{route('posts.create')}}">+ Post something</a>
           </li>
+
+          <li class="nav-item">
+            <a href="{{ route('logout') }}" class="sidebar-link btn btn-danger" onclick="confirmLogout(event)">
+                <span>Log out</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
+
+  <script>
+    function confirmLogout(event) {
+        event.preventDefault();
+        Swal.fire({
+            title: 'Apakah anda yakin?',
+            text: 'Anda akan keluar dari akun anda',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Keluar',
+            cancelButtonText: 'Kembali'
+
+        }).then((result) => {
+            if (result.value) {
+                document.location.href = "{{ route('logout') }}";
+            }
+        });
+    }
+</script>
