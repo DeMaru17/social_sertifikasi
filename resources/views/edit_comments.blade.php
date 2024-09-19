@@ -18,10 +18,6 @@
                             <textarea class="form-control" id="content" name="content" required>{{ $comment->content }}</textarea>
                         </div>
                         <div class="form-group">
-                            <label for="hashtag">Hashtag</label>
-                            <input type="text" name="hashtag" id="hashtag" class="form-control" value="{{ $comment->hashtag }}">
-                        </div>
-                        <div class="form-group">
                             <label for="image">Image:</label>
                             @if($comment->image)
                                 <img src="{{ asset('storage/image/' . $comment->image) }}" alt="Comment Image" class="img-fluid mb-2">
@@ -29,7 +25,7 @@
                             <input type="file" class="form-control" id="image" name="image">
                         </div>
 
-                       
+
                         <button type="submit" class="btn btn-primary mt-3">Update Comment</button>
                     </form>
                 </div>

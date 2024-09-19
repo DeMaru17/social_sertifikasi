@@ -21,13 +21,10 @@
                     <form method="POST" action="{{ route('comments.store') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label for="content">Content:</label>
+                            <label for="content">Komentar:</label>
                             <textarea class="form-control" id="content" name="content" required></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="hashtag">Hashtag</label>
-                            <input type="text" name="hashtag" id="hashtag" class="form-control">
-                        </div>
+
                         <div class="form-group">
                             <label for="image">Image:</label>
                             <input type="file" class="form-control" id="image" name="image">

@@ -13,10 +13,6 @@
                 <textarea name="content" id="content" class="form-control" required>{{ $post->content }}</textarea>
             </div>
             <div class="form-group">
-                <label for="hashtag">Hashtag</label>
-                <input type="text" name="hashtag" id="hashtag" class="form-control" value="{{ $post->hashtag }}">
-            </div>
-            <div class="form-group">
                 <label for="image">Image</label>
                 <input type="file" name="image" id="image" class="form-control">
                 <img src="{{ asset('storage/image/' . $post->image) }}" alt="Gambar" width="100px">

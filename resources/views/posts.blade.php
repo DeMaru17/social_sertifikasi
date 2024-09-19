@@ -18,7 +18,6 @@
                                 <img src="{{ asset('storage/image/' . $post->image) }}" alt="Post Image" class="img-fluid">
                             @endif
                             <div class="mt-3">{{ $post->content }}</div>
-                            <p>{{ $post->hashtag }}</p>
 
                             <a href="{{route('comments.show',$post->id)}}">Comment</a>
                             <hr>
@@ -27,7 +26,6 @@
                             @foreach($post->comments as $comment)
                             <strong>{{ $comment->user->name }}</strong>
                             <p>{{ $comment->content }}</p>
-                            <p>{{$comment->hashtag}}</p>
                             <img src="{{ asset('storage/image/' . $comment->image) }}" alt="" class="img-fluid">
                             @if(Auth::user()->id == $comment->id_user)
                             <a href="{{route('comments.edit', $comment->id)}}" class="btn btn-sm btn-primary mt-3">Edit</a>

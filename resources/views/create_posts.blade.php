@@ -10,12 +10,8 @@
         <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="content">Content</label>
+                <label for="content">Caption</label>
                 <textarea name="content" id="content" class="form-control" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="hashtag">Hashtag</label>
-                <input type="text" name="hashtag" id="hashtag" class="form-control">
             </div>
             <div class="form-group">
                 <label for="image">Image</label>

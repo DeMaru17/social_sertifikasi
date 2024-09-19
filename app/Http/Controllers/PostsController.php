@@ -37,16 +37,11 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'content' => 'required|string|max:250',
-        //     'hashtag' => 'nullable|string',
-        //     'image' => 'nullable|file|mimes:jpg,jpeg,png|max:2048',
-        // ]);
+
 
         $post = new Posts();
         $post->id_user = Auth::user()->id;
         $post->content = $request->input('content');
-        $post->hashtag = $request->input('hashtag');
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -88,7 +83,6 @@ class PostsController extends Controller
         // Update data
         $post->update([
             'content' => $request->content,
-            'hashtag' => $request->hashtag,
         ]);
 
         // Jika ada gambar yang diupload

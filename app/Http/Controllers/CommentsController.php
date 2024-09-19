@@ -34,7 +34,6 @@ class CommentsController extends Controller
         $comments->id_user = $request->id_user;
         $comments->id_post = $request->id_post;
         $comments->content = $request->input('content');
-        $comments->hashtag = $request->input('hashtag');
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
@@ -76,7 +75,6 @@ class CommentsController extends Controller
     {
         $comment = Comments::find($id);
         $comment->content = $request->input('content');
-        $comment->hashtag = $request->input('hashtag');
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
