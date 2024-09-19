@@ -1,0 +1,56 @@
+1. Tabel Users
+Menyimpan data pengguna.
+id (PK): Integer, Auto Increment
+username: String, Unik, untuk login
+email: String, Unik
+password: String
+bio: Text, opsional
+profile_picture: String, menyimpan path foto profil
+created_at: Timestamp
+updated_at: Timestamp
+
+2. Tabel Posts
+Menyimpan data postingan.
+id (PK): Integer, Auto Increment
+user_id (FK): Integer, relasi ke tabel Users
+content: Text, maksimal 250 karakter
+image: String, menyimpan path gambar (opsional)
+file: String, menyimpan path file (opsional)
+created_at: Timestamp
+updated_at: Timestamp
+
+3. Tabel Comments
+Menyimpan data komentar.
+id (PK): Integer, Auto Increment
+post_id (FK): Integer, relasi ke tabel Posts
+user_id (FK): Integer, relasi ke tabel Users
+content: Text, maksimal 250 karakter
+image: String, menyimpan path gambar (opsional)
+file: String, menyimpan path file (opsional)
+created_at: Timestamp
+updated_at: Timestamp
+
+4. Tabel Hashtags
+Menyimpan data hashtag.
+id (PK): Integer, Auto Increment
+name: String, Unik (misal: #coding)
+
+5. Tabel Post_Hashtags
+Menyimpan relasi antara postingan dan hashtag.
+post_id (FK): Integer, relasi ke tabel Posts
+hashtag_id (FK): Integer, relasi ke tabel Hashtags
+
+6. Tabel Comment_Hashtags
+Menyimpan relasi antara komentar dan hashtag.
+comment_id (FK): Integer, relasi ke tabel Comments
+hashtag_id (FK): Integer, relasi ke tabel Hashtags
+
+
+Desain Database
+Relasi antar tabel:
+Satu User dapat memiliki banyak Posts dan Comments.
+Setiap Post dan Comment dapat memiliki banyak Hashtags melalui tabel pivot Post_Hashtags dan Comment_Hashtags.
+Likes disambungkan ke Posts dan Users.
+User dapat saling mengikuti melalui tabel Followers.
+
+
