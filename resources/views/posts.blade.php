@@ -11,7 +11,7 @@
                 <div class="col-md-4 mx-auto mt-4">
                     <div class="card mb-4">
                         <div class="card-header">
-                            <strong>{{ $post->user->name }}</strong>
+                            <h3>{{ $post->user->name }}</h3>
                         </div>
                         <div class="card-body">
                             @if($post->image)

@@ -12,12 +12,22 @@
           <li class="nav-item">
             <a style="color: white" class="nav-link" href="{{route('posts.create')}}">+ Post something</a>
           </li>
-
           <li class="nav-item">
+            <form class="d-flex" role="search" method="POST" action="{{ route('search.hashtag') }}">
+                @csrf
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="cari">
+                <button class="btn btn-success" type="submit">Search</button>
+            </form>
+        </li>
+
+
+          <li class="nav-item mx-4">
             <a href="{{ route('logout') }}" class="sidebar-link btn btn-danger" onclick="confirmLogout(event)">
                 <span>Log out</span>
             </a>
           </li>
+
+
         </ul>
       </div>
     </div>
