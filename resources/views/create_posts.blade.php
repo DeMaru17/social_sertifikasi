@@ -3,8 +3,8 @@
 @section('content')
 
 
-
-<div class="card">
+<div class="d-flex justify-content-center align-items-center mt-4">
+<div class="card" style="width:  50rem;">
     <div class="card-header">Create Post</div>
     <div class="card-body">
         <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
@@ -17,9 +17,10 @@
                 <label for="image">Image</label>
                 <input type="file" name="image" id="image" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Create Post</button>
+            <button type="submit" class="btn btn-primary mt-4">Create Post</button>
         </form>
     </div>
+</div>
 </div>
 
 @endsection

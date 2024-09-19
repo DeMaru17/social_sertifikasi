@@ -19,7 +19,14 @@
                                 <p><strong>Bio:</strong> {{ $user->bio }}</p>
                             </div>
                         </div>
-                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                        <div class="d-flex justify-content-end">
+                            <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+                            <form action="{{ route('user.destroy', $user->id) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger mx-3" onclick="return confirm('Are you sure you want to delete this account?')">Delete Account</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,7 +56,7 @@
                                         <button type="submit" class="btn btn-danger mx-3" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
                                     </form>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>

@@ -14,7 +14,7 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label for="content">Content:</label>
+                            <label for="content">Komentar:</label>
                             <textarea class="form-control" id="content" name="content" required>{{ $comment->content }}</textarea>
                         </div>
                         <div class="form-group">
