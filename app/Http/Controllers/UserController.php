@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +18,8 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        return view('user.index', compact('user'));
+
+        return view('user.index', compact('user', 'posts'));
     }
 
     /**
@@ -110,6 +112,7 @@ class UserController extends Controller
     public function showProfile()
     {
         $user = Auth::user();
-        return view('user.index', compact('user'));
+        $posts = Posts::where('id_user', $user->id)->get();
+        return view('user.index', compact('user', 'posts'));
     }
 }

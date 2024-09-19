@@ -19,12 +19,7 @@
                             @endif
                             <div class="mt-3">{{ $post->content }}</div>
                             <p>Hashtag: {{ $post->hashtag }}</p>
-                            @if(Auth::id() == $post->id_user)
-                                <div class="mt-2">
-                                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-primary">Update</a>
-                                    <a href="{{ route('posts.destroy', $post->id) }}" class="btn btn-danger" data-confirm-delete="true">Delete</a>
-                                </div>
-                            @endif
+                            
                         </div>
                     </div>
                 </div>
