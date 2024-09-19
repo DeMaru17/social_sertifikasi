@@ -118,10 +118,10 @@ class PostsController extends Controller
             // Hapus data post
             $post->delete();
             Alert::success('Success', 'Berhasil menghapus postingan');
-            return redirect()->route('posts.index')->with('success', 'Post berhasil dihapus');
+            return redirect()->route('user.index')->with('success', 'Post berhasil dihapus');
         } else {
             Alert::error('Error', 'Postingan tidak ditemukan');
-            return redirect()->route('posts.index')->with('error', 'Post tidak ditemukan');
+            return redirect()->route('user.index')->with('error', 'Post tidak ditemukan');
         }
     }
 }
