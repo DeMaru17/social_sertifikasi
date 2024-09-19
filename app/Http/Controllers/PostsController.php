@@ -6,6 +6,7 @@ use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PostsController extends Controller
 {
@@ -16,6 +17,11 @@ class PostsController extends Controller
     {
         $user = Auth::user();
         $posts = Posts::all();
+
+        $title = 'Delete User!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view('posts',compact('user','posts'));
     }
 
@@ -52,6 +58,8 @@ class PostsController extends Controller
 
         $post->save();
 
+        Alert::success('Success','Berhasil mengupload postingan');
+
         return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
 
@@ -68,15 +76,38 @@ class PostsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Posts::findOrFail($id);
+        return view('edit_post',compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Posts $post)
     {
-        //
+
+    // Update data
+    $post->update([
+        'content' => $request->content,
+        'hashtag' => $request->hashtag,
+    ]);
+
+    // Jika ada gambar yang diupload
+    if ($request->hasFile('image')) {
+        // Hapus gambar sebelumnya
+        Storage::delete('public/image/' . $post->image);
+
+        $image = $request->file('image');
+        $path = $image->store('image','public');
+        $name = basename($path);
+        // Update gambar
+        $post->update([
+            'image' => $name,
+        ]);
+    }
+    Alert::success('Success','Berhasil mengupdate postingan');
+    // Redirect ke halaman post
+    return redirect()->route('posts.index')->with('success', 'Post berhasil diupdate!');
     }
 
     /**
@@ -84,6 +115,22 @@ class PostsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Posts::findOrFail($id);
+        if ($post) {
+        // Hapus gambar jika ada
+        if ($post->image) {
+            Storage::delete('public/image/' . $post->image);
+        }
+
+        // Hapus data post
+        $post->delete();
+        Alert::success('Success','Berhasil menghapus postingan');
+        return redirect()->route('posts.index')->with('success', 'Post berhasil dihapus');
+        } else {
+        Alert::error('Error','Postingan tidak ditemukan');
+        return redirect()->route('posts.index')->with('error', 'Post tidak ditemukan');
+    }
+
+
     }
 }
