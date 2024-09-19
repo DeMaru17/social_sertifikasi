@@ -14,8 +14,8 @@ Menyimpan data postingan.
 id (PK): Integer, Auto Increment
 user_id (FK): Integer, relasi ke tabel Users
 content: Text, maksimal 250 karakter
+hashtag: string
 image: String, menyimpan path gambar (opsional)
-file: String, menyimpan path file (opsional)
 created_at: Timestamp
 updated_at: Timestamp
 
@@ -29,21 +29,6 @@ image: String, menyimpan path gambar (opsional)
 file: String, menyimpan path file (opsional)
 created_at: Timestamp
 updated_at: Timestamp
-
-4. Tabel Hashtags
-Menyimpan data hashtag.
-id (PK): Integer, Auto Increment
-name: String, Unik (misal: #coding)
-
-5. Tabel Post_Hashtags
-Menyimpan relasi antara postingan dan hashtag.
-post_id (FK): Integer, relasi ke tabel Posts
-hashtag_id (FK): Integer, relasi ke tabel Hashtags
-
-6. Tabel Comment_Hashtags
-Menyimpan relasi antara komentar dan hashtag.
-comment_id (FK): Integer, relasi ke tabel Comments
-hashtag_id (FK): Integer, relasi ke tabel Hashtags
 
 
 Desain Database

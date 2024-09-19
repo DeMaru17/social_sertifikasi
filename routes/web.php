@@ -14,4 +14,6 @@ Route::post('action-login', [\App\Http\Controllers\LoginController::class, 'acti
 Route::get('register', [\App\Http\Controllers\RegisterController::class, 'index'])->name('register');
 Route::post('register', [\App\Http\Controllers\RegisterController::class, 'store'])->name('action-register');
 
-Route::resource('timeline', \App\Http\Controllers\TimelineController::class);
+Route::resource('posts', \App\Http\Controllers\PostsController::class);
+Route::resource('user', \App\Http\Controllers\UserController::class);
+Route::get('/profile', [\App\Http\Controllers\UserController::class, 'showProfile'])->name('user.profile');
