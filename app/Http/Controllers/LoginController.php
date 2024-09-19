@@ -23,9 +23,12 @@ class LoginController extends Controller
 
         $credential = $request->only(['email', 'password']);
         if (Auth::attempt($credential)) {
+            Alert::success('Berhasil masuk');
             return redirect()->intended('timeline');
+        } else{
+
+            $error = 'Login gagal. Mohon periksa kembali email dan password anda!';
+            return redirect()->back()->withErrors(['login' => $error]);
         }
-        Alert::warning('Warning Title', 'Warning Message');
-        return redirect()->back()->withErrors(['Login gagal. Mohon periksa kembali email dan password anda!']);
     }
 }

@@ -1,8 +1,8 @@
 1. Tabel Users
 Menyimpan data pengguna.
 id (PK): Integer, Auto Increment
-username: String, Unik, untuk login
-email: String, Unik
+name: String,
+email: String, Unik, untuk login
 password: String
 bio: Text, opsional
 profile_picture: String, menyimpan path foto profil

@@ -15,16 +15,15 @@
 <div class="card">
     @include('sweetalert::alert')
     <div class="card-header">
-      <h5 align="center" class="card-title">Login</h5>
+      <h5 align="center" class="card-title">Register</h5>
     </div>
-    @if ($errors->has('login'))
-        <div class="alert alert-danger">
-        {{ $errors->first('login') }}
-        </div>
-    @endif
     <div class="card-body">
-      <form action="{{route('action-login')}}" method="post">
+      <form action="{{route('action-register')}}" method="post">
         @csrf
+        <div class="mb-3">
+          <label for="name" class="form-label">Nama</label>
+          <input type="text" name="name" id="name" class="form-control" placeholder="Enter nama">
+        </div>
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
           <input type="email" name="email" id="email" class="form-control" placeholder="Enter email">
@@ -33,8 +32,8 @@
           <label for="password" class="form-label">Password</label>
           <input type="password" name="password" id="password" class="form-control" placeholder="Enter password">
         </div>
-        <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
-        <a href="{{route('register')}}" class="btn btn-success w-100">Register</a>
+        <button type="submit" class="btn btn-primary w-100 mb-3">Register</button>
+        <a href="{{route('login')}}" class="btn btn-danger w-100">Kembali</a>
       </form>
     </div>
 </div>
