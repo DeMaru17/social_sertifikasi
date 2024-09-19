@@ -16,13 +16,12 @@ class PostsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $posts = Posts::all();
-
+        $posts = Posts::with('comments')->orderBy('id', 'desc')->get();
         $title = 'Delete User!';
         $text = "Are you sure you want to delete?";
         confirmDelete($title, $text);
 
-        return view('posts',compact('user','posts'));
+        return view('posts', compact('user', 'posts'));
     }
 
     /**
@@ -51,14 +50,14 @@ class PostsController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $path = $image->store('image','public');
+            $path = $image->store('image', 'public');
             $name = basename($path);
             $post->image = $name;
         }
 
         $post->save();
 
-        Alert::success('Success','Berhasil mengupload postingan');
+        Alert::success('Success', 'Berhasil mengupload postingan');
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
@@ -77,7 +76,7 @@ class PostsController extends Controller
     public function edit(string $id)
     {
         $post = Posts::findOrFail($id);
-        return view('edit_post',compact('post'));
+        return view('edit_post', compact('post'));
     }
 
     /**
@@ -86,28 +85,28 @@ class PostsController extends Controller
     public function update(Request $request, Posts $post)
     {
 
-    // Update data
-    $post->update([
-        'content' => $request->content,
-        'hashtag' => $request->hashtag,
-    ]);
-
-    // Jika ada gambar yang diupload
-    if ($request->hasFile('image')) {
-        // Hapus gambar sebelumnya
-        Storage::delete('public/image/' . $post->image);
-
-        $image = $request->file('image');
-        $path = $image->store('image','public');
-        $name = basename($path);
-        // Update gambar
+        // Update data
         $post->update([
-            'image' => $name,
+            'content' => $request->content,
+            'hashtag' => $request->hashtag,
         ]);
-    }
-    Alert::success('Success','Berhasil mengupdate postingan');
-    // Redirect ke halaman post
-    return redirect()->route('posts.index')->with('success', 'Post berhasil diupdate!');
+
+        // Jika ada gambar yang diupload
+        if ($request->hasFile('image')) {
+            // Hapus gambar sebelumnya
+            Storage::delete('public/image/' . $post->image);
+
+            $image = $request->file('image');
+            $path = $image->store('image', 'public');
+            $name = basename($path);
+            // Update gambar
+            $post->update([
+                'image' => $name,
+            ]);
+        }
+        Alert::success('Success', 'Berhasil mengupdate postingan');
+        // Redirect ke halaman post
+        return redirect()->route('posts.index')->with('success', 'Post berhasil diupdate!');
     }
 
     /**
@@ -117,20 +116,18 @@ class PostsController extends Controller
     {
         $post = Posts::findOrFail($id);
         if ($post) {
-        // Hapus gambar jika ada
-        if ($post->image) {
-            Storage::delete('public/image/' . $post->image);
-        }
+            // Hapus gambar jika ada
+            if ($post->image) {
+                Storage::delete('public/image/' . $post->image);
+            }
 
-        // Hapus data post
-        $post->delete();
-        Alert::success('Success','Berhasil menghapus postingan');
-        return redirect()->route('posts.index')->with('success', 'Post berhasil dihapus');
+            // Hapus data post
+            $post->delete();
+            Alert::success('Success', 'Berhasil menghapus postingan');
+            return redirect()->route('posts.index')->with('success', 'Post berhasil dihapus');
         } else {
-        Alert::error('Error','Postingan tidak ditemukan');
-        return redirect()->route('posts.index')->with('error', 'Post tidak ditemukan');
-    }
-
-
+            Alert::error('Error', 'Postingan tidak ditemukan');
+            return redirect()->route('posts.index')->with('error', 'Post tidak ditemukan');
+        }
     }
 }

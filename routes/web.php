@@ -17,4 +17,5 @@ Route::post('register', [\App\Http\Controllers\RegisterController::class, 'store
 
 Route::resource('posts', \App\Http\Controllers\PostsController::class);
 Route::resource('user', \App\Http\Controllers\UserController::class);
+Route::resource('comments', \App\Http\Controllers\CommentsController::class);
 Route::get('/profile', [\App\Http\Controllers\UserController::class, 'showProfile'])->name('user.profile');

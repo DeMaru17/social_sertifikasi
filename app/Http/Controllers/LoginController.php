@@ -23,7 +23,7 @@ class LoginController extends Controller
 
         $credential = $request->only(['email', 'password']);
         if (Auth::attempt($credential)) {
-            Alert::success('Berhasil masuk');
+            
             return redirect()->intended('posts');
         } else{
 
