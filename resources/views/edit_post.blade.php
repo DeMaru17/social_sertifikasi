@@ -9,7 +9,7 @@
             @csrf
             @method('PUT')
             <div class="form-group">
-                <label for="content">Content</label>
+                <label for="content">Caption</label>
                 <textarea name="content" id="content" class="form-control" required>{{ $post->content }}</textarea>
             </div>
             <div class="form-group">
